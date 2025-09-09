@@ -1,5 +1,3 @@
-//@ts-check
-
 const shopContainer = document.getElementById("shop-container");
 const cookieButton = document.getElementById("cookie");
 const cookieCountDisplay = document.getElementById("cookie-count");
@@ -116,25 +114,11 @@ const shop = {
     if (newTab === "shop") {
       console.log(shopItems);
       for (let i = 0; i < shopItems.length; i++) {
-        console.log(shopItems[i]);
-        if (gameLoop.getAmount(shopItems[i].name)) {
-          console.log(
-            "Price is: " +
-              shopItems[i].price * (gameLoop.getAmount(shopItems[i].name) + 1),
-          );
-          this.addItemForSale({
-            ...shopItems[i],
-
-            price:
-              shopItems[i].price * (gameLoop.getAmount(shopItems[i].name) + 1),
-          });
-        } else {
-          this.addItemForSale({
-            ...shopItems[i],
-
-            price: shopItems[i].price,
-          });
-        }
+        console.log(shopItems[i])
+        this.addItemForSale({
+          ...shopItems[i],
+          price: shopItems[i].price * (gameLoop.getAmount(shopItems[i].name) + 1),
+        });
       }
     } else if (newTab === "upgrades") {
       for (let i = 0; i < this.upgrades.length; i++) {
@@ -157,14 +141,13 @@ const gameLoop = {
       this.autoClickers[itemName] = 1;
     }
     this.cookiesPerSecond += cps;
+    const savedUpgrades = localStorage.getItem("savedUpgrades");
     localStorage.setItem("savedShop", JSON.stringify(this.autoClickers));
     this.runLoop();
 
-    const purchased = shopItems.find((it) => it.name === itemName);
-    if (purchased) {
-      const newEmoji = new EmojiBuddy(purchased.emoji);
-      newEmoji.spawn(Math.random() * 1000, Math.random() * 1000);
-    }
+    const purchased = shopItems.find(it => it.name === itemName);
+    if (purchased) emojiBuddies.spawnEmoji(purchased.emoji);
+
   },
   updateCookieMulti(itemName, amt) {
     this.upgrades[itemName] = amt;
@@ -219,10 +202,9 @@ const gameLoop = {
           cookiePerSecondAndIndexMap[upgradeName].index,
         );
         for (let i = 0; i < amount; i++) {
-          const emojiBuddy = new EmojiBuddy(
+          emojiBuddies.spawnEmoji(
             cookiePerSecondAndIndexMap[upgradeName].emoji,
           );
-          emojiBuddy.spawn(Math.random() * 1000, Math.random() * 1000);
         }
         this.runLoop();
       }
@@ -238,69 +220,10 @@ const gameLoop = {
   },
 };
 
-class EmojiBuddy {
-  /**
-   * @type {{top: number, left: number, right: number, bottom: number, width: number, height: number}}
-   */
-  bounds;
-  /**
-   * @type {number}
-   */
-  x = 0;
-  /**
-   * @type {number}
-   */
-  y = 0;
-  /**
-   * @type {string}
-   */
-  emojiString = "";
-  /**
-   * @type {HTMLElement}
-   */
-  emoji;
-  /**
-   * velocity on the y axis
-   * @type {number}
-   */
-  dy = 2;
-  /**
-   * velocity on the x axis
-   * @type {number}
-   */
-  dx = 2;
-  /**
-   * Count of repeated bounces on the x axis
-   * @type {number}
-   */
-  bounceErrorsX = 0;
-  /**
-   * count of repeated bounces on the y axis
-   * @type {number}
-   */
-  bounceErrorsY = 0;
-  /**
-   *
-   * @param {string} emoji
-   */
-  constructor(emoji) {
-    this.emojiString = emoji;
-    this.animate = this.animate.bind(this);
-  }
-  setBounds() {
-    if (!gameArea) {
-      console.error("gameArea not found");
-      return {
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        width: 0,
-        height: 0,
-      };
-    }
+const emojiBuddies = {
+  getBounds() {
     const rect = gameArea.getBoundingClientRect();
-    const bounds = {
+    return {
       top: rect.top + window.scrollY,
       left: rect.left + window.scrollX,
       right: rect.right + window.scrollX,
@@ -308,101 +231,47 @@ class EmojiBuddy {
       width: rect.width,
       height: rect.height,
     };
-    this.bounds = bounds;
-    return bounds;
-  }
-  /**
-   * Get bottom style number relative to the gameArea
-   * @param {number} x
-   * @returns {string}
-   */
-  getLeftFromX(x) {
-    return (this.bounds.left + x).toString();
-  }
-  /**
-   * Get top style number relative to the gameArea
-   * @param {number} y
-   * @returns {string}
-   */
-  getTopFromY(y) {
-    return (this.bounds.top + y).toString();
-  }
-  /**
-   * Spawns emoji on the page and starts animation
-   * @param {number} x
-   * @param {number} y
-   */
-  spawn(x, y) {
-    this.setBounds();
+  },
+  spawnEmoji(emojiString) {
+    const bounds = this.getBounds();
 
-    this.x = x % this.bounds.width;
-    this.y = y % this.bounds.height;
-
+    // Create emoji element
     const emoji = document.createElement("div");
-    emoji.textContent = this.emojiString;
+    emoji.textContent = emojiString;
     emoji.style.position = "absolute";
     emoji.style.fontSize = "2rem";
-    gameArea?.appendChild(emoji);
-    emoji.style.left = this.getLeftFromX(this.x);
-    emoji.style.top = this.getTopFromY(this.y);
 
-    this.emoji = emoji;
-    this.animate();
-    return emoji;
-  }
-  /**
-   * Animates the Emoji (Bounces off the walls)
-   */
-  animate() {
-    console.log(this.bounceErrorsX, this.bounceErrorsY);
-    this.setBounds();
+    // Random start inside bounding box
+    let x = bounds.left + Math.random() * (bounds.width - 32);
+    let y = bounds.top + Math.random() * (bounds.height - 32);
 
-    this.x += this.dx;
-    this.y += this.dy;
+    emoji.style.left = `${x}px`;
+    emoji.style.top = `${y}px`;
 
-    // Bounce off actual bounds
-    if (
-      Number(this.getLeftFromX(this.x)) <= this.bounds.left ||
-      Number(this.getLeftFromX(this.x)) + this.emoji.offsetWidth >=
-        this.bounds.right
-    ) {
-      this.bounceErrorsX++;
-      this.dx *= -1;
-      console.log("X");
-    } else {
-      this.bounceErrorsX = 0;
-    }
-    if (
-      Number(this.getTopFromY(this.y)) <= this.bounds.top ||
-      Number(this.getTopFromY(this.y)) + this.emoji.offsetHeight >=
-        this.bounds.bottom
-    ) {
-      this.bounceErrorsY++;
-      this.dy *= -1;
-      console.log("Y");
-    } else {
-      this.bounceErrorsY = 0;
+    // Add emoji to body (not inside gameArea, since we're using page coords)
+    document.body.appendChild(emoji);
+
+    // Random velocity
+    let dx = (Math.random() < 0.5 ? -1 : 1) * 2;
+    let dy = (Math.random() < 0.5 ? -1 : 1) * 2;
+
+    function animate() {
+      x += dx;
+      y += dy;
+
+      // Bounce off actual bounds
+      if (x <= bounds.left || x + 32 >= bounds.right) dx *= -1;
+      if (y <= bounds.top || y + 32 >= bounds.bottom) dy *= -1;
+
+      emoji.style.left = `${x}px`;
+      emoji.style.top = `${y}px`;
+
+      requestAnimationFrame(animate);
     }
 
-    if (this.bounceErrorsX > 5) {
-      this.x = 0;
-    }
-    if (this.bounceErrorsY > 5) {
-      this.y = 0;
-    }
-
-    this.emoji.style.left = `${this.getLeftFromX(this.x)}px`;
-    this.emoji.style.top = `${this.getTopFromY(this.y)}px`;
-
-    requestAnimationFrame(this.animate);
-  }
-  /**
-   * Destroys the Emoji
-   */
-  destroy() {
-    this.emoji.remove();
-  }
-}
+    animate();
+  },
+};
 
 const grandma = {
   name: "Grandma",
@@ -436,12 +305,21 @@ const bank = {
   cookiesPerSecond: 20,
 };
 
+const CookieIsland = {
+  name: "Cookie Island",
+  emoji: "🏝️",
+  price: 10000,
+  priceIncrementer: 1.1,
+  cookiesPerSecond: 50,
+};
+
 const shopItems = [];
 
 shopItems.push(grandma);
 shopItems.push(factory);
 shopItems.push(mangotemple);
 shopItems.push(bank);
+shopItems.push(CookieIsland);
 
 const x2Click = {
   name: "2X Clicks",
@@ -456,6 +334,7 @@ shop.addItemForSale(grandma);
 shop.addItemForSale(factory);
 shop.addItemForSale(mangotemple);
 shop.addItemForSale(bank);
+shop.addItemForSale(CookieIsland);
 gameLoop.fetchSavedData();
 cookie.fetchStoredCookies();
 cookieButton.addEventListener("click", () => {
