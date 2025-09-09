@@ -328,7 +328,24 @@ const x2Click = {
   itemEffected: "click",
   multiplier: 2,
 };
+
+const x3Click = {
+  name: "3X Clicks",
+  emoji: "🖱",
+  price: 500,
+  itemEffected: "click",
+  multiplier: 3,
+};
+
+const FastFlippers = {
+  name: "Fast Flippers",
+  emoji: "🖱",
+  price: 1000,
+  itemEffected: "click",
+  multiplier: 10,
+};
 shop.upgrades.push(x2Click);
+shop.upgrades.push(x3Click);
 
 shop.addItemForSale(grandma);
 shop.addItemForSale(factory);
@@ -349,4 +366,5 @@ cookieButton.addEventListener("click", () => {
   gameLoop.getAmount("Factory");
   gameLoop.getAmount("MangoTemple");
   gameLoop.getAmount("Bank");
+  gameLoop.getAmount("Cookie Island");
 });
