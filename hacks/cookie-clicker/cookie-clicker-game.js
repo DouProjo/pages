@@ -1,3 +1,25 @@
+// Dynamically create and add a Restart Game button only for this file
+window.addEventListener('DOMContentLoaded', () => {
+  const gameArea = document.getElementById('game-area') || document.body;
+  const restartBtn = document.createElement('button');
+  restartBtn.id = 'restart-btn';
+  restartBtn.textContent = 'Restart Game';
+  restartBtn.style.marginTop = '2rem';
+  restartBtn.style.background = '#e11d48';
+  restartBtn.style.color = '#fff';
+  restartBtn.style.border = 'none';
+  restartBtn.style.padding = '0.75rem 2rem';
+  restartBtn.style.borderRadius = '6px';
+  restartBtn.style.fontSize = '1rem';
+  restartBtn.style.cursor = 'pointer';
+  restartBtn.addEventListener('mouseover', () => restartBtn.style.background = '#be123c');
+  restartBtn.addEventListener('mouseout', () => restartBtn.style.background = '#e11d48');
+  restartBtn.addEventListener('click', () => {
+    localStorage.clear();
+    location.reload();
+  });
+  gameArea.appendChild(restartBtn);
+});
 const shopContainer = document.getElementById("shop-container");
 const cookieButton = document.getElementById("cookie");
 const cookieCountDisplay = document.getElementById("cookie-count");
