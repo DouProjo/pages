@@ -346,6 +346,7 @@ const FastFlippers = {
 };
 shop.upgrades.push(x2Click);
 shop.upgrades.push(x3Click);
+shop.upgrades.push(FastFlippers);
 
 shop.addItemForSale(grandma);
 shop.addItemForSale(factory);
