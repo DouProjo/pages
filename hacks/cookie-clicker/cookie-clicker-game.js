@@ -5,15 +5,15 @@ window.addEventListener('DOMContentLoaded', () => {
   restartBtn.id = 'restart-btn';
   restartBtn.textContent = 'Restart Game';
   restartBtn.style.marginTop = '2rem';
-  restartBtn.style.background = '#1b0065ff';
+  restartBtn.style.background = '#4c0affff';
   restartBtn.style.color = '#fff';
   restartBtn.style.border = 'none';
   restartBtn.style.padding = '0.75rem 2rem';
   restartBtn.style.borderRadius = '6px';
   restartBtn.style.fontSize = '1rem';
   restartBtn.style.cursor = 'pointer';
-  restartBtn.addEventListener('mouseover', () => restartBtn.style.background = '#be123c');
-  restartBtn.addEventListener('mouseout', () => restartBtn.style.background = '#e11d48');
+  restartBtn.addEventListener('mouseover', () => restartBtn.style.background = '#0d0054ff');
+  restartBtn.addEventListener('mouseout', () => restartBtn.style.background = '#cccdffff');
   restartBtn.addEventListener('click', () => {
     localStorage.clear();
     location.reload();
