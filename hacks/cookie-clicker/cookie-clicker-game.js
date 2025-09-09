@@ -273,6 +273,8 @@ const emojiBuddies = {
   },
 };
 
+// The code Bellow is for Main Shop
+
 const grandma = {
   name: "Grandma",
   emoji: "👵",
@@ -291,7 +293,7 @@ const factory = {
 
 const mangotemple = {
   name: "Mango Temple",
-  emoji: "🥭",
+  emoji: "🛕",
   price: 2000,
   priceIncrementer: 1.2,
   cookiesPerSecond: 10,
@@ -321,6 +323,8 @@ shopItems.push(mangotemple);
 shopItems.push(bank);
 shopItems.push(CookieIsland);
 
+// The code Bellow is for Upgrades Shop
+
 const x2Click = {
   name: "2X Clicks",
   emoji: "🖱",
@@ -339,7 +343,7 @@ const x3Click = {
 
 const FastFlippers = {
   name: "Fast Flippers",
-  emoji: "🖱",
+  emoji: "🐬",
   price: 1000,
   itemEffected: "click",
   multiplier: 10,
