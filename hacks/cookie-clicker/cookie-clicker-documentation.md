@@ -12,19 +12,12 @@ permalink: /cookie-clicker-game-docs/
 
 | Role            | Name                 | GitHub |
 |:---------------:|:--------------------:|:------:|
-| 🧭 Scrum Master | **Kush Shah**        | [GitHub](https://github.com/kush1434) |
-| 📋 Assistant Scrum | **Trevor Vick**   | [GitHub](https://github.com/Tvick22) |
-| 💻 Engineer     | Elliot Yang          | [GitHub](https://github.com/ellioty15) |
+| 🧭 Scrum Master | **Rohit Datla**        | [GitHub](https://github.com/kush1434) |
+| 📋 Assistant Scrum | **Satiago Alveredo**   | [GitHub](https://github.com/Tvick22) |
+| 💻 Engineer     | Malakie         | [GitHub](https://github.com/ellioty15) |
 
-### Group 2
 
-| Role            | Name                 | GitHub |
-|:---------------:|:--------------------:|:------:|
-| 💻 Engineer     | Travis Callow        | [Github](https://github.com/TravisCallow) |
-| 💻 Engineer     | Aranya Bhattacharya  | [GitHub](https://github.com/aranyab0924) |
-| 💻 Engineer     | Alex Rubio           | [GitHub](https://github.com/AlexRubio1) |
-
-We already have a working Cookie Clicker game. Right now, the game lets you click on the cookie to increase your score. That’s cool, but pretty basic. Your job is to **add a new feature** to make the game more fun and complex.
+We have took an aldready engineered Cookie Clicker game and made a better version of it. We added new feutures that were not in the beta version, that just makes life a bit more easier, also adding more upgrades, and more items to the shop.
 
 This will give you practice with:
 - Writing and reusing **methods**
@@ -40,20 +33,19 @@ This will give you practice with:
   <div markdown="1">
 
 ### Strategic Group of 3
-Work together in groups of three to plan, design, and test your addition.
+We work together in groups of three to plan, design, test, and imporve the pre version of the game.
 
 ### Step 1 – Evaluate the Game
 Play the current Cookie Clicker version to understand what features already exist, how cookies accumulate, and what feels missing or repetitive.
 
 ### Step 2 – Brainstorm New Ideas
-Discuss possible additions as a group. Use the example ideas provided (new shop item, superpower, unlockable, or visual change) as inspiration, or come up with your own creative twist.
+We discussed ideas that would make the cookie clicker game much better and a cleaner experience for the user.
 
 ### Step 3 – Define Your Feature
 See flowchart below for current workflow example. Decide on your chosen feature and write a clear one-sentence description of what it does.
 
 ### Step 4 – Design & Implement
-Add any new buttons, text, or visuals if your feature needs them.  
-Write at least one **method** to make your feature work.  
+We decided that we should add a restart button as if people would want to restart it would be there. We also added some more upgrades, and auto clickers. 
 
 ### Step 5 – Save with localStorage
 If your feature should persist after refreshing, integrate **localStorage** to save its state.
@@ -71,8 +63,8 @@ flowchart TD
 
     B --> C[🛒 Shop<br/>Spend cookies on upgrades & auto-clickers]
 
-    C --> D[👵 Grandma, 🏭 Factory, 🥭 Temple, 🏦 Bank<br/>Auto-clickers generate cookies per second]
-    C --> E[🖱 2X Clicks<br/>Doubles cookies gained per click]
+    C --> D[👵 Grandma, 🏭 Factory, 🛕 Temple, 🏦 Bank, 🏝️ Island, 🍪 Master, 🌏 Planet<br/>Auto-clickers generate cookies per second]
+    C --> E[🖱 2X Clicks 🖱 3X Clicks, 🐬 Fast Flippers, 🤚 thousand hands<br/>Increases cookies gained per click]
 
     D --> F[GameLoop<br/>Automatically adds cookies every second]
     E --> B
@@ -153,7 +145,7 @@ You will need to use localStorage so your feature can **save progress**. For exa
 ## Your Task – Add a New Feature
 
 Choose one feature to add to the game. Be creative, but make sure it includes:
-- At least one **function**
+- Restart Button
 - An **if statement** to check conditions
 - Code placed in the correct file
 - Use of **localStorage** if your feature needs to be saved

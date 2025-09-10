@@ -23,6 +23,25 @@ window.addEventListener('DOMContentLoaded', () => {
 const shopContainer = document.getElementById("shop-container");
 const cookieButton = document.getElementById("cookie");
 const cookieCountDisplay = document.getElementById("cookie-count");
+
+// Create and insert CPS display
+const cpsDisplay = document.createElement('div');
+cpsDisplay.id = 'cps-display';
+cpsDisplay.style.fontSize = '1.2rem';
+cpsDisplay.style.margin = '0.5rem 0';
+cpsDisplay.textContent = 'CPS: 0';
+if (cookieCountDisplay && cookieCountDisplay.parentNode) {
+  cookieCountDisplay.parentNode.insertBefore(cpsDisplay, cookieCountDisplay.nextSibling);
+}
+
+// CPS logic
+let clickTimestamps = [];
+function updateCPS() {
+  const now = Date.now();
+  // Keep only clicks in the last 1 second
+  clickTimestamps = clickTimestamps.filter(ts => now - ts <= 1000);
+  cpsDisplay.textContent = 'CPS: ' + clickTimestamps.length;
+}
 const gameArea = document.getElementById("game-area");
 
 const cookie = {
@@ -413,6 +432,9 @@ shop.addItemForSale(CookiePlanet);
 gameLoop.fetchSavedData();
 cookie.fetchStoredCookies();
 cookieButton.addEventListener("click", () => {
+  // Track click for CPS
+  clickTimestamps.push(Date.now());
+  updateCPS();
   console.log("COOKIE");
   if (cookie.cookieMulti) {
     cookie.addCookies(1 * cookie.cookieMulti);
