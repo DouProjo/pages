@@ -36,12 +36,30 @@ if (cookieCountDisplay && cookieCountDisplay.parentNode) {
 
 // CPS logic
 let clickTimestamps = [];
+let upgradeCPS = 0; // This will be updated every 30 seconds
 function updateCPS() {
   const now = Date.now();
   // Keep only clicks in the last 1 second
   clickTimestamps = clickTimestamps.filter(ts => now - ts <= 1000);
-  cpsDisplay.textContent = 'CPS: ' + clickTimestamps.length;
+  cpsDisplay.textContent = 'CPS: ' + (clickTimestamps.length + upgradeCPS);
 }
+
+// Update upgradeCPS every 30 seconds
+function recalculateUpgradeCPS() {
+  let total = 0;
+  if (gameLoop && gameLoop.upgrades) {
+    for (const key in gameLoop.upgrades) {
+      if (typeof gameLoop.upgrades[key] === 'number') {
+        total += gameLoop.upgrades[key];
+      }
+    }
+  }
+  upgradeCPS = total;
+  updateCPS(); // Update display when recalculated
+}
+setInterval(recalculateUpgradeCPS, 30000); // 30 seconds
+// Initial calculation
+recalculateUpgradeCPS();
 const gameArea = document.getElementById("game-area");
 
 const cookie = {
@@ -201,7 +219,7 @@ const gameLoop = {
       this.intervalId = 0;
     }
     this.intervalId = setInterval(() => {
-      cookie.addCookies(this.cookiesPerSecond);
+      cookie.addCookies(this.cookiesPerSecond + upgradeCPS);
     }, 1000);
   },
   fetchSavedData() {

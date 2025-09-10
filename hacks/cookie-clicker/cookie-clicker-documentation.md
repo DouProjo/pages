@@ -146,9 +146,9 @@ You will need to use localStorage so your feature can **save progress**. For exa
 
 Choose one feature to add to the game. Be creative, but make sure it includes:
 - Restart Button
-- An **if statement** to check conditions
-- Code placed in the correct file
-- Use of **localStorage** if your feature needs to be saved
+- Add more to the shop
+- Add more to the upgrades
+- Add a Cookies per second counter
 
 ### Example Ideas
 - New Shop Item: e.g., an upgrade that costs cookies and increases click power.
