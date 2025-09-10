@@ -345,6 +345,15 @@ const CookieMaster = {
   cookiesPerSecond: 100,
 };
 
+const CookiePlanet = {
+  name: "Cookie Planet",
+  emoji: "🌏",
+  price: 200000,
+  priceIncrementer: 1.0,
+  cookiesPerSecond: 500,
+};
+
+
 const shopItems = [];
 
 shopItems.push(grandma);
@@ -353,6 +362,7 @@ shopItems.push(mangotemple);
 shopItems.push(bank);
 shopItems.push(CookieIsland);
 shopItems.push(CookieMaster);
+shopItems.push(CookiePlanet);
 
 // The code Bellow is for Upgrades Shop
 
@@ -383,7 +393,6 @@ const FastFlippers = {
 shop.upgrades.push(x2Click);
 shop.upgrades.push(x3Click);
 shop.upgrades.push(FastFlippers);
-shop.upgrades.push(CookieMaster);
 
 shop.addItemForSale(grandma);
 shop.addItemForSale(factory);
@@ -391,6 +400,7 @@ shop.addItemForSale(mangotemple);
 shop.addItemForSale(bank);
 shop.addItemForSale(CookieIsland);
 shop.addItemForSale(CookieMaster);
+shop.addItemForSale(CookiePlanet);
 gameLoop.fetchSavedData();
 cookie.fetchStoredCookies();
 cookieButton.addEventListener("click", () => {
@@ -407,4 +417,5 @@ cookieButton.addEventListener("click", () => {
   gameLoop.getAmount("Bank");
   gameLoop.getAmount("Cookie Island");
   gameLoop.getAmount("Cookie Master");
+  gameLoop.getAmount("Cookie Planet");
 });
