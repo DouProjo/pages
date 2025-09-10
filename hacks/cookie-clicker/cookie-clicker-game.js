@@ -390,9 +390,18 @@ const FastFlippers = {
   multiplier: 10,
 };
 
+const ThousandHands = {
+  name: "Thousand Hands",
+  emoji: "🖐️",
+  price: 100000,
+  itemEffected: "click",
+  multiplier: 100,
+};
+
 shop.upgrades.push(x2Click);
 shop.upgrades.push(x3Click);
 shop.upgrades.push(FastFlippers);
+shop.upgrades.push(ThousandHands);
 
 shop.addItemForSale(grandma);
 shop.addItemForSale(factory);
