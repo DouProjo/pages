@@ -26,7 +26,7 @@ permalink: /background
     imagesLoaded++;
     startGameWorld();
   };
-
+// This is the part where they update the background
   function startGameWorld() {
     if (imagesLoaded < 2) return;
 
@@ -59,7 +59,7 @@ permalink: /background
         ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
       }
     }
-
+//creates the image
     class Player extends GameObject {
       constructor(image, gameWorld) {
         const width = image.naturalWidth / 2;
@@ -75,7 +75,7 @@ permalink: /background
         this.frame++;
       }
     }
-
+// This is the part where the image moves
     class GameWorld {
       static gameSpeed = 5;
       constructor(backgroundImg, spriteImg) {
@@ -90,7 +90,7 @@ permalink: /background
         this.canvas.style.position = 'absolute';
         this.canvas.style.left = `0px`;
         this.canvas.style.top = `${(window.innerHeight - this.height) / 2}px`;
-
+//this is the game object
         this.gameObjects = [
          new Background(backgroundImg, this),
          new Player(spriteImg, this)

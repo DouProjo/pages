@@ -30,7 +30,7 @@ permalink: /cookie-clicker-game/
   </button>
   <button id="chaoticOhioBtn"
     class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 mb-2 rounded shadow">
-    ⏳ Chaotic Ohio (Cost: 6700000)
+    ⏳ Cookie Island (Cost: 10000)
   </button>
 </div>
 <!-- Game -->

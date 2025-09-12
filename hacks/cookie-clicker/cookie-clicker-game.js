@@ -353,6 +353,13 @@ const CookiePlanet = {
   cookiesPerSecond: 500,
 };
 
+const JavaScriptConsle = {
+  name: "JavaScript Console",
+  emoji: "💻",
+  price: 1000000,
+  cookiesPerSecond: 1000,
+};
+
 
 const shopItems = [];
 
