@@ -370,6 +370,7 @@ shopItems.push(bank);
 shopItems.push(CookieIsland);
 shopItems.push(CookieMaster);
 shopItems.push(CookiePlanet);
+shopItems.push(JavaScriptConsle);
 
 // The code Bellow is for Upgrades Shop
 
@@ -417,6 +418,7 @@ shop.addItemForSale(bank);
 shop.addItemForSale(CookieIsland);
 shop.addItemForSale(CookieMaster);
 shop.addItemForSale(CookiePlanet);
+shop.addItemForSale(JavaScriptConsle);
 gameLoop.fetchSavedData();
 cookie.fetchStoredCookies();
 cookieButton.addEventListener("click", () => {
@@ -434,4 +436,5 @@ cookieButton.addEventListener("click", () => {
   gameLoop.getAmount("Cookie Island");
   gameLoop.getAmount("Cookie Master");
   gameLoop.getAmount("Cookie Planet");
+  gameLoop.getAmount("JavaScript Console");
 });
